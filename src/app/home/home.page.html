@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      User List with Local Storage
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- Form to Add New User -->
+  <form (ngSubmit)="saveForm()">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input [(ngModel)]="user.name" name="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input [(ngModel)]="user.email" name="email"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" type="submit">{{isEdit ? 'Update' : 'Save'}}</ion-button>
+  </form>
+
+  <!-- Table to Display Saved Users -->
+  <ion-list>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col><strong>Name</strong></ion-col>
+          <ion-col><strong>Email</strong></ion-col>
+          <ion-col><strong>Actions</strong></ion-col>
+        </ion-row>
+
+        <!-- Loop through the stored users and display them in rows -->
+        <ion-row *ngFor="let user of users; let i = index">
+          <ion-col>{{user.name}}</ion-col>
+          <ion-col>{{user.email}}</ion-col>
+          <ion-col>
+            <ion-button (click)="editUser(i)" fill="clear" color="primary">Edit</ion-button>
+            <ion-button (click)="deleteUser(i)" fill="clear" color="danger">Delete</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
